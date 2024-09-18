@@ -1,11 +1,30 @@
+import { mount } from "@cypress/react18";
 import Button from "../../src/components/Button";
 
-describe("Button Component", () => {
-  it("should render with the correct background color when the color prop is passed", () => {
-    cy.mount(<Button color="blue">Click Me</Button>);
-    cy.get("button").should("have.css", "background-color", "rgb(0, 0, 255)");
+describe('Button Component', () => {
+  it('should render with the correct background color when the color prop is passed', () => {
+    mount(<Button color="blue">Click Me</Button>);
+    cy.get('button').should('have.css', 'background-color', 'rgb(0, 0, 255)');
+  });
+
+  it('should render with default background color when no color prop is passed', () => {
+    mount(<Button>Click Me</Button>);
+    cy.get('button').should('have.css', 'background-color', 'rgb(128, 128, 128)');
+  });
+
+  it('should render with the correct text', () => {
+    mount(<Button color="green">Submit</Button>);
+    cy.get('button').should('have.text', 'Submit');
+  });
+
+  it('should change opacity on hover', () => {
+    mount(<Button color="red">Hover Me</Button>);
+    cy.get('button').trigger('mouseover');
+    cy.wait(1000);
+    cy.get('button').should('have.css', 'opacity', '0.8');
   });
 });
+
 
 //? "describe" -> La función describe es proporcionada por el marco de pruebas (en este caso, Cypress con la
 //? extensión cypress/react). Agrupa una serie de pruebas relacionadas bajo un título descriptivo. En
