@@ -8,4 +8,7 @@ export default defineConfig({
       viteConfig: {},
     },
   },
+  e2e: {
+    baseUrl: 'http://localhost:5173'
+  },
 });
